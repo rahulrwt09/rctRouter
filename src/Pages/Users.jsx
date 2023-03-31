@@ -1,12 +1,22 @@
 import {useEffect, useState } from "react"
 import {Link, useSearchParams} from "react-router-dom"
 
-
+const getcurrentpage= (pagenum)=>{
+    pagenum= Number(pagenum);
+    if(typeof pagenum!=="number" || pagenum<=0){
+        pagenum=1;
+    }
+    if(!pagenum){
+        pagenum=1
+    }
+    return pagenum;
+}
 const User= () =>{
     const [data, setData]= useState({});
     //maintain page state
     const [seacrhparams, setsearchparams] = useSearchParams();
-    const [page, setPage]= useState(1);
+    const initialvalue=getcurrentpage(seacrhparams.get("page"));
+    const [page, setPage]= useState( initialvalue);
     useEffect(()=>{
       fetch(`https://reqres.in/api/users?page=${page}`)
       .then((res)=>res.json())
@@ -14,7 +24,7 @@ const User= () =>{
       .catch((err)=>console.log(err));
     }, [page])
     useEffect( ()=>{
-        setsearchparams({page})
+        setsearchparams({page:page})
     },[page]
          
     );

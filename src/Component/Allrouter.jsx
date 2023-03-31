@@ -14,7 +14,7 @@ function Allroute(){
     <Route path="/about" element={<PrivateRoute><About/></PrivateRoute>}/>
     <Route path="/contact" element={<PrivateRoute><Contact/></PrivateRoute>}/>
  
-    <Route path="/User" element={<PrivateRoute><User/></PrivateRoute>}/>
+    <Route path="/User" element={<User/>}/>
     <Route path="/User/:id" element={<PrivateRoute><Singleuser/></PrivateRoute>}/>
     <Route path="/Login" element={<Login/>}/>
   </Routes>
