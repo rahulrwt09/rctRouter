@@ -1,10 +1,11 @@
 import {useEffect, useState } from "react"
-import {Link, useNavigate} from "react-router-dom"
+import {Link, useSearchParams} from "react-router-dom"
 
 
 const User= () =>{
     const [data, setData]= useState({});
     //maintain page state
+    const [seacrhparams, setsearchparams] = useSearchParams();
     const [page, setPage]= useState(1);
     useEffect(()=>{
       fetch(`https://reqres.in/api/users?page=${page}`)
@@ -12,6 +13,11 @@ const User= () =>{
       .then((res)=>setData(res))
       .catch((err)=>console.log(err));
     }, [page])
+    useEffect( ()=>{
+        setsearchparams({page})
+    },[page]
+         
+    );
     const handlepagechange= (val)=>{
         const changeBy=page+val;
         setPage(changeBy)
